@@ -39,6 +39,7 @@ impl Display for Package {
 fn parse_lock(name: &str, contents: &str) -> Result<Vec<Package>> {
     match name {
         "Cargo.lock" | "poetry.lock" => parse_cargo(contents),
+        _ if name.starts_with("Cargo.lock") => parse_cargo(contents),
         "composer.lock" => parse_composer(contents),
         "go.sum" => parse_go_sum(contents),
         "package-lock.json" => parse_npm(contents),
